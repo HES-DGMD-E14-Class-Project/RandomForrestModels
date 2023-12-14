@@ -20,7 +20,7 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
 #dictionary containing all the american sign language characters
 # labels_dict = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h', 8: 'i', 9: 'j', 10: 'k', 11: 'l', 12: 'm', 13: 'n', 14: 'o', 15: 'p', 16: 'q', 17: 'r', 18: 's', 19: 't', 20: 'u', 21: 'v', 22: 'w', 23: 'x', 24: 'y', 25: 'z'}
-labels_dict = {0: 'W', 1: 'i', 2: 'l', 3:'s', 4:'o', 5:'n'}
+labels_dict = {0: 'T', 1: 'a', 2: 'h'}
     
 while True:
 
