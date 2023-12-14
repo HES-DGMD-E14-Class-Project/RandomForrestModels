@@ -10,11 +10,11 @@ data_dict = pickle.load(open('./data.pickle', 'rb'))
 # print("data_dict variable",data_dict )
 
 
-data = np.array(data_dict['data']) #np.asarray(data_dict['data'], dtype=object)
+data = np.array(data_dict['data'])
 data2 = []
 
 for index in range(len(data)):
-    if data[index] != 42:
+    if len(data[index]) != 42:
         data[index] = data[index][:42]
     data2.append(data[index][:42])
         
@@ -29,15 +29,13 @@ data2 = np.array(data2)
 
 print("This is the data variable's shape", data.shape)
 
-labels = np.array(data_dict['labels']) #np.asarray(data_dict['labels'], dtype=object)
+labels = np.array(data_dict['labels']) 
 
 x_train, x_test, y_train, y_test = train_test_split(data2, labels, test_size=0.2, shuffle=True, stratify=labels)
 # print(x_train)
 
 model = RandomForestClassifier()
 
-# print("x_train ", x_train)
-# print("y_train", y_train)
 print("x_train shape", x_train.shape)
 print("y_train shape", y_train.shape)
 print(f"x {type(x_train)} y {type(y_train)}")

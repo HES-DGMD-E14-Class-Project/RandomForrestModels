@@ -4,11 +4,11 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-model_dict = pickle.load(open('./model.p', 'rb'))
+model_dict = pickle.load(open('model.p', 'rb'))
 model = model_dict['model']
 
 #Might need to change depending on abailable hardware
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 #Create the mediapipe objects
 mp_hands = mp.solutions.hands
@@ -19,8 +19,8 @@ hands = mp_hands.Hands(static_image_mode=True, min_detection_confidence=0.3)
 
 
 #dictionary containing all the american sign language characters
-labels_dict = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h', 8: 'i', 9: 'j', 10: 'k', 11: 'l', 12: 'm', 13: 'n', 14: 'o', 15: 'p', 16: 'q', 17: 'r', 18: 's', 19: 't', 20: 'u', 21: 'v', 22: 'w', 23: 'x', 24: 'y', 25: 'z'}
-
+# labels_dict = {0: 'a', 1: 'b', 2: 'c', 3: 'd', 4: 'e', 5: 'f', 6: 'g', 7: 'h', 8: 'i', 9: 'j', 10: 'k', 11: 'l', 12: 'm', 13: 'n', 14: 'o', 15: 'p', 16: 'q', 17: 'r', 18: 's', 19: 't', 20: 'u', 21: 'v', 22: 'w', 23: 'x', 24: 'y', 25: 'z'}
+labels_dict = {0: 'W', 1: 'i', 2: 'l', 3:'s', 4:'o', 5:'n'}
     
 while True:
 
@@ -64,12 +64,12 @@ while True:
         x2 = int(max(x_list) * W) - 10
         y2 = int(max(y_list) * H) - 10
 
-        prediction = model.predict([np.asarray(data_aux)])
+        prediction = model.predict([np.asarray(data_aux)][:42])
 
         predicted_character = labels_dict[int(prediction[0])]
 
         cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 0), 4)
-        cv2.putText(frame, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 1.3, (0, 0, 0), 6,
+        cv2.putText(frame, predicted_character, (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 5, (0, 0, 0), 6,
                     cv2.LINE_AA)
 
     cv2.imshow('frame', frame)
